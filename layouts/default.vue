@@ -75,28 +75,28 @@ export default {
   },
   computed: {
     getProductsCategoryList() {
-      return this.$store.state.getProducts.productsCategory
+      return this.$store.state.products.productsCategory
     },
     selectedCategory: {
       get() {
-        return this.$store.state.getProducts.selectedCategory
+        return this.$store.state.products.selectedCategory
       },
       set(val) {
-        this.$store.dispatch('getProducts/setSelectedCategory', val)
+        this.$store.dispatch('products/setSelectedCategory', val)
       },
     },
   },
   watch: {
     search(val) {
-      this.$store.dispatch('getProducts/setFilterBySearching', val)
+      this.$store.dispatch('products/setFilterBySearching', val)
     },
   },
   methods: {
     async getProductCategory() {
-      await this.$store.dispatch('getProducts/getProductCategory')
+      await this.$store.dispatch('products/getProductCategory')
     },
     async getProducts() {
-      await this.$store.dispatch('getProducts/getProducts')
+      await this.$store.dispatch('products/getProducts')
     },
   },
 }

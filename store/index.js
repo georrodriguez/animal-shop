@@ -1,8 +1,10 @@
 /* eslint-disable no-new */
 import Vuex from 'vuex'
-import getProducts from './getProducts'
+import products from './products'
+import shoppingCart from './shoppingCart'
 new Vuex.Store({
     modules: {
-        getProducts,
+        products,
+        shoppingCart,
     },
 })

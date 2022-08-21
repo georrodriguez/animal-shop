@@ -72,7 +72,9 @@
         </v-card-text>
       </v-card>
       <v-spacer />
-      <v-btn color="deep-purple lighten-2" text> Add to Cart </v-btn>
+      <v-btn @click="openModalDialogShopping" color="primary lighten-2" text>
+        Add to Cart
+      </v-btn>
     </v-card-actions>
 
     <v-card-actions v-else
@@ -95,7 +97,16 @@ export default {
     },
   },
 
-  methods: {},
+  methods: {
+    async openModalDialogShopping() {
+      this.product.quantity = this.quantity
+      await this.$store.dispatch(
+        'shoppingCart/setProductSelected',
+        this.product
+      )
+      this.$store.dispatch('shoppingCart/setModalDialog', true)
+    },
+  },
 }
 </script>
 <style scoped>
