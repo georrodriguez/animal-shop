@@ -3,6 +3,8 @@ export default {
         return {
             productSelected: {},
             modalDialog: false,
+            cart: [],
+            totalPrice: 0,
         }
     },
     mutations: {
@@ -12,6 +14,14 @@ export default {
         saveModalDialog(state, data) {
             state.modalDialog = data
         },
+        addToCart(state, item) {
+            state.cart.push(item)
+        },
+        setTotalPrice(state) {
+            state.cart.forEach((element) => {
+                state.totalPrice = state.totalPrice + element.price * element.quantity
+            })
+        },
     },
     actions: {
         setProductSelected({ commit }, data) {
@@ -19,6 +29,10 @@ export default {
         },
         setModalDialog({ commit }, data) {
             commit('saveModalDialog', data)
+        },
+        addItemToCart({ commit }, item) {
+            commit('addToCart', item)
+            commit('setTotalPrice')
         },
     },
 }

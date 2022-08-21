@@ -1,5 +1,15 @@
 <template>
   <v-container fluid>
+    <v-snackbar
+      color="primary"
+      rounded="pill"
+      right
+      v-model="showSnackbar"
+      :timeout="3000"
+    >
+      {{ getSnackbarData.text }}
+    </v-snackbar>
+
     <v-row justify="center" align="center">
       <v-col v-for="product in getProducts" :key="product.code" cols="4">
         <product-card :product="product"> </product-card>
@@ -25,6 +35,10 @@ export default {
     getProducts() {
       return this.$store.state.products.products
     },
+    getSnackbarData() {
+      return this.$store.state.globalModals.indexSnackbar
+    },
+
     dialog: {
       get() {
         return this.$store.state.shoppingCart.modalDialog
@@ -33,9 +47,15 @@ export default {
         this.$store.dispatch('shoppingCart/setModalDialog', val)
       },
     },
-  },
-  mounted() {
-    /* this.getProducts */
+
+    showSnackbar: {
+      get() {
+        return this.$store.state.globalModals.showIndexSnackbar
+      },
+      set(val) {
+        this.$store.dispatch('globalModals/setShowSnackbar', val)
+      },
+    },
   },
 }
 </script>

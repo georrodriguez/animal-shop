@@ -18,9 +18,33 @@
         label="Search Product in category..."
         append-icon="mdi-magnify"
       ></v-text-field>
-      <v-btn class="ma-2" text icon color="white">
-        <v-icon>mdi-store-outline</v-icon>
-      </v-btn>
+
+      <!-- Cart -->
+      <v-menu
+        v-model="menu"
+        :close-on-content-click="false"
+        :nudge-width="400"
+        offset-x
+      >
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            @click="showCartModal"
+            class="ma-2"
+            v-bind="attrs"
+            v-on="on"
+            text
+            icon
+            color="white"
+          >
+            <v-badge v-if="showNotification" color="red" dot>
+              <v-icon>mdi-store-outline</v-icon>
+            </v-badge>
+            <v-icon v-else>mdi-store-outline</v-icon>
+          </v-btn>
+        </template>
+        <cart></cart>
+      </v-menu>
+      <!-- Cart -->
     </v-app-bar>
     <!-- navbar -->
 
@@ -59,10 +83,15 @@
 </template>
 
 <script>
+import Cart from '../components/Cart.vue'
 export default {
   name: 'DefaultLayout',
+  components: {
+    Cart,
+  },
   data() {
     return {
+      menu: false,
       loading: true,
       search: '',
     }
@@ -76,6 +105,9 @@ export default {
   computed: {
     getProductsCategoryList() {
       return this.$store.state.products.productsCategory
+    },
+    showNotification() {
+      return this.$store.state.globalModals.showNotificationNavbar
     },
     selectedCategory: {
       get() {
@@ -92,6 +124,9 @@ export default {
     },
   },
   methods: {
+    showCartModal() {
+      this.$store.dispatch('globalModals/setShowNotificationNavbar', false)
+    },
     async getProductCategory() {
       await this.$store.dispatch('products/getProductCategory')
     },
