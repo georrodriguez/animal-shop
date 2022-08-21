@@ -15,6 +15,7 @@
 
       <v-divider></v-divider>
 
+      <!-- Products in cart -->
       <v-container fluid v-if="products.length > 0">
         <div
           v-for="(product, idx) in products"
@@ -25,7 +26,7 @@
           <h4 class="card-abstract-container">Name: {{ product.name }}</h4>
           <v-row align="center" class="mb-1">
             <v-col cols="2"
-              ><v-img height="100%" :src="product.photo"></v-img
+              ><v-img height="50px" width="50px" :src="product.photo"></v-img
             ></v-col>
             <v-col cols="2">
               <span>Price: ${{ product.price }}</span>
@@ -34,7 +35,7 @@
             <v-col cols="4">
               <v-btn
                 :disabled="product.quantity === 1"
-                @click="product.quantity--"
+                @click="removeQuantity(product)"
                 class="ma-2"
                 text
                 icon
@@ -45,7 +46,7 @@
               {{ product.quantity }}
               <v-btn
                 :disabled="product.quantity === product.stock"
-                @click="product.quantity++"
+                @click="addQuantity(product)"
                 class="ma-2"
                 text
                 icon
@@ -67,6 +68,7 @@
           <h3>Total: ${{ totalPrice }}</h3>
         </div>
       </v-container>
+      <!-- Products in cart -->
 
       <v-list v-else>
         <v-list-item-title>Nothing here yet...</v-list-item-title>
@@ -88,9 +90,20 @@ export default {
     products() {
       return this.$store.state.shoppingCart.cart
     },
-
     totalPrice() {
       return this.$store.state.shoppingCart.totalPrice
+    },
+  },
+  methods: {
+    removeQuantity(product) {
+      const newData = JSON.parse(JSON.stringify(product))
+      newData.quantity = 1
+      this.$store.dispatch('shoppingCart/removeItemToCart', newData)
+    },
+    addQuantity(product) {
+      const newData = JSON.parse(JSON.stringify(product))
+      newData.quantity = 1
+      this.$store.dispatch('shoppingCart/addItemToCart', newData)
     },
   },
 }

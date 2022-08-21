@@ -46,31 +46,8 @@
           <v-card-title>${{ product.price * product.quantity }}</v-card-title>
 
           <v-card-actions>
-            <v-card>
-              <v-card-text
-                ><v-btn
-                  :disabled="product.quantity === 1"
-                  @click="product.quantity--"
-                  class="ma-2"
-                  text
-                  icon
-                  color="white"
-                >
-                  <v-icon>mdi-minus</v-icon>
-                </v-btn>
-                {{ product.quantity }}
-                <v-btn
-                  :disabled="product.quantity === product.stock"
-                  @click="product.quantity++"
-                  class="ma-2"
-                  text
-                  icon
-                  color="white"
-                >
-                  <v-icon>mdi-plus</v-icon>
-                </v-btn>
-              </v-card-text>
-            </v-card>
+            Total quantity: {{ product.quantity }}
+
             <v-spacer />
             <v-btn @click="addItemToCart" color="primary lighten-2" text>
               Add to Cart

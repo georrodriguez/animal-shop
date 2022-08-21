@@ -39,6 +39,8 @@ export default {
     },
     actions: {
         async getProductCategory({ commit }) {
+            /* Hi! I know this URL should be in the .env file,
+                      but for the exercise, i put it directly. */
             try {
                 await this.$axios
                     .$get('http://sva.talana.com:8000/api/product-category/')
@@ -51,6 +53,8 @@ export default {
         },
 
         async getProducts({ commit }) {
+            /* Hi! I know this URL should be in the .env file,
+                      but for the exercise, i put it directly. */
             try {
                 await this.$axios
                     .$get('http://sva.talana.com:8000/api/product/')

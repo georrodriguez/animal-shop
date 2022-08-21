@@ -100,6 +100,7 @@ export default {
   methods: {
     async openModalDialogShopping() {
       this.product.quantity = this.quantity
+      await this.$store.dispatch('shoppingCart/setProductSelected', {})
       await this.$store.dispatch(
         'shoppingCart/setProductSelected',
         this.product

@@ -97,10 +97,8 @@ export default {
     }
   },
   async mounted() {
-    this.loading = true
     this.getProductCategory()
     this.getProducts()
-    this.loading = false
   },
   computed: {
     getProductsCategoryList() {
@@ -132,6 +130,7 @@ export default {
     },
     async getProducts() {
       await this.$store.dispatch('products/getProducts')
+      this.loading = false
     },
   },
 }

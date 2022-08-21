@@ -1,8 +1,8 @@
 export default {
     state() {
         return {
-            indexSnackbar: {},
-            showIndexSnackbar: false,
+            indexSnackbar: { text: 'Welcome!' },
+            showIndexSnackbar: true,
             showNotificationNavbar: false,
         }
     },
